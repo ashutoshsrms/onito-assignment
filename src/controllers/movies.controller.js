@@ -14,12 +14,11 @@ const longestDurationMovies = async (req, res) => {
       ORDER BY runtimeMinutes DESC
       LIMIT 10
     `;
-
     const results = await queryAsync(sql);
     res.status(200).json(success(200, { data: results }));
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error');
+    res.status(500).send(error(500, { error: err.message }));
   }
 };
 
@@ -38,7 +37,7 @@ const topRatedMovies = async (req, res) => {
     res.status(200).json(success(200, { data: results }));
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error');
+    res.status(500).send(error(500, { error: err.message }));
   }
 };
 
@@ -62,7 +61,7 @@ const genreMoviesWithSubtotals = async (req, res) => {
     res.status(200).json(success(200, { data: results }));
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error');
+    res.status(500).send(error(500, { error: err.message }));
   }
 };
 
@@ -79,11 +78,9 @@ const addMovie = async (req, res) => {
     res.status(200).send(success(200));
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error');
+    res.status(500).send(error(500, { error: err.message }));
   }
 };
-
-
 
 
 const updateRuntime = async (req, res) => {
@@ -101,14 +98,14 @@ const updateRuntime = async (req, res) => {
     res.status(200).send(success(200));
   } catch (err) {
     console.error(err);
-    res.status(500).send('Server error');
+    res.status(500).send(error(500, { error: err.message }));
   }
 };
 
 
 module.exports = {
   longestDurationMovies,
-  topRatedMovies, 
+  topRatedMovies,
   genreMoviesWithSubtotals,
   addMovie,
   updateRuntime
